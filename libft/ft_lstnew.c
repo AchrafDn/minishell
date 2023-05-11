@@ -13,15 +13,13 @@
 #include "../header.h"
 #include "libft.h"
 
-t_word	*ft_lstnew(char *str, int value)
+t_cmd	*ft_lstnew()
 {
-	t_word *p;
+	t_cmd *p;
 
-	p = malloc(sizeof(t_word)); //free
+	p = malloc(sizeof(t_cmd)); //free
 	if (!p)
 		return (NULL);
-	p->content = str;
-	p->value = value;
 	p->next = NULL;
 	return (p);
 }

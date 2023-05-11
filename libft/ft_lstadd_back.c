@@ -12,9 +12,9 @@
 
 #include"libft.h"
 #include"../header.h"
-void	ft_lstadd_back(t_word **lst, t_word *new)
+void	ft_lstadd_back(t_cmd **lst, t_cmd *new)
 {
-	t_word	*temp;
+	t_cmd	*temp;
 
 	if (!lst || !new)
 		return ;

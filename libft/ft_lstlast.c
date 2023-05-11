@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "../header.h"
 
-t_word	*ft_lstlast(t_word *lst)
+t_cmd	*ft_lstlast(t_cmd *lst)
 {
 	if (!lst)
 		return (NULL);
