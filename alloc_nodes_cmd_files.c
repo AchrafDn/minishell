@@ -1,22 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   alloc_nodes_cmd_files.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adadoun <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/14 16:02:15 by adadoun           #+#    #+#             */
+/*   Updated: 2023/05/14 16:02:17 by adadoun          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
-
-// void	aloc_nodes(t_cmd **lst, t_args *args, t_vars *vars)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	args->numberofnodes = 1;
-// 	while (vars->ar_2d[i])
-// 	{
-// 		if (vars->ar_2d[i][0] == '|')
-// 			args->numberofnodes++;
-// 		i++;
-// 	}
-// 	// printf("Number cmd	:	%i\n", args->number_cmd);
-// 	(*lst) = malloc(sizeof(t_cmd) * (args->numberofnodes + 1));
-// 	if (!(*lst))
-// 		exit(1);
-// }
 
 void	alloc_cmd(t_cmd **lst, t_vars *vars)
 {
@@ -35,7 +29,6 @@ void	alloc_cmd(t_cmd **lst, t_vars *vars)
 			i++;
 		}
 	}
-	printf("Number cmd	:	%i\n", n_cmd);
 	(*lst)->command = malloc(sizeof(char *) * (n_cmd + 1));
 	if (!((*lst)->command))
 		exit(1);
@@ -58,7 +51,6 @@ void	alloc_files(t_cmd **lst, t_vars *vars)
 		else
 			i++;
 	}
-	printf("Number files	:	%i\n", n_files);
 	(*lst)->files = malloc(sizeof(t_files) * (n_files + 1));
 	if (!((*lst)->files))
 		exit(1);

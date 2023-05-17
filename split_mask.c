@@ -12,14 +12,26 @@
 
 #include "header.h"
 
-void	create_mask(t_vars *vars, char *str)
+int	create_mask_quotes(t_vars *vars, char *str, int i)
 {
-	int	i;
+	char	c;
+
+	c = str[i];
+	vars->mask[i++] = '1';
+	while (str[i] && str[i] != c)
+		vars->mask[i++] = '1';
+	vars->mask[i] = '1';
+	return (i);
+}
+
+char	*create_mask(t_vars *vars, char *str)
+{
+	int		i;
 
 	i = -1;
 	vars->mask = malloc((sizeof(char) + 1) * ft_strlen(str));
 	if (!vars->mask)
-		exit(1);
+		return (NULL);
 	while (str[++i])
 	{
 		if (str[i] == ' ' || str[i] == '\t')
@@ -28,17 +40,13 @@ void	create_mask(t_vars *vars, char *str)
 			vars->mask[i] = '3';
 		else if (str[i] == '<' || str[i] == '>')
 			vars->mask[i] = '2';
-		else if (str[i] == '"')
-		{
-			vars->mask[i++] = '1';
-			while (str[i] && str[i] != '"')
-				vars->mask[i++] = '1';
-			vars->mask[i] = '1';
-		}
+		else if (str[i] == '"' || str[i] == '\'')
+			i = create_mask_quotes(vars, str, i);
 		else
 			vars->mask[i] = '1';
 	}
 	vars->mask[i] = '\0';
+	return ("Good");
 }
 
 int	n_word(t_vars *vars)
@@ -65,7 +73,7 @@ int	n_word(t_vars *vars)
 	return (vars->word);
 }
 
-void	split_mask(t_vars *vars, char *str)
+char	*split_mask(t_vars *vars, char *str)
 {
 	int	i;
 	int	j;
@@ -75,7 +83,7 @@ void	split_mask(t_vars *vars, char *str)
 	x = 0;
 	vars->ar_2d = malloc((sizeof(char *)) * (n_word(vars) + 1));
 	if (!vars->ar_2d)
-		exit(1);
+		return (NULL);
 	while (vars->mask[i])
 	{
 		j = 0;
@@ -92,10 +100,16 @@ void	split_mask(t_vars *vars, char *str)
 			i++;
 	}
 	vars->ar_2d[x] = NULL;
+	return ("Good");
 }
 
-void	create_2d_array(t_vars *vars, char *str)
+char	*create_2d_array(t_vars *vars, char *str)
 {
-	create_mask(vars, str);
-	split_mask(vars, str);
+	if (!create_mask(vars, str))
+		return (NULL);
+	if (!split_mask(vars, str))
+		return (NULL);
+	free(vars->mask);
+	vars->mask = NULL;
+	return ("Good");
 }

@@ -12,6 +12,7 @@
 
 #include"libft.h"
 #include"../header.h"
+
 void	ft_lstadd_back(t_cmd **lst, t_cmd *new)
 {
 	t_cmd	*temp;

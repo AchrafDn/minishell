@@ -60,54 +60,6 @@ static void	ft_free(char **s)
 	s = NULL;
 }
 
-// static char	**ft_res(char **ptr, char *s, char c, int k)
-// {
-// 	size_t	j;
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 	{
-// 		j = 0;
-// 		while (s[i + j] && s[i + j] != c && s[i + j] != '"')
-// 			j++;
-// 		if (j != 0)
-// 		{
-// 			if (s[i + j] == '"')
-// 				j--;
-// 			printf("hereee:%c\n", s[j]);
-// 			ptr[k] = ft_substr(s, i, j);
-// 			if (!ptr[k])
-// 			{
-// 				ft_free(ptr);
-// 				return (NULL);
-// 			}
-// 			i = i + j;
-// 			k++;
-// 		}
-// 		if (s[i] && s[i] == '"')
-// 		{
-// 			j = 1;
-// 			while (s[i + j] != '"')
-// 				j++;
-// 			// printf("here:%s\n", s + i);
-// 			ptr[k] = ft_substr(s, i, j + 1);
-// 			if (!ptr[k])
-// 			{
-// 				ft_free(ptr);
-// 				return (NULL);
-// 			}
-// 			i = j + 2;
-// 			// printf("here:%c\n", s[i]);
-// 			k++;
-// 		}
-// 		else
-// 			i++;
-// 	}
-// 	ptr[k] = 0;
-// 	return (ptr);
-// }
-
 static char	**ft_res(char **ptr, char *s, char c, int k)
 {
 	size_t	j;
@@ -123,7 +75,6 @@ static char	**ft_res(char **ptr, char *s, char c, int k)
 		{
 			if (s[i + j] == '"')
 				j--;
-			printf("hereee:%c\n", s[j]);
 			ptr[k] = ft_substr(s, i, j);
 			if (!ptr[k])
 			{
@@ -138,7 +89,6 @@ static char	**ft_res(char **ptr, char *s, char c, int k)
 			j = 1;
 			while (s[i + j] != '"')
 				j++;
-			// printf("here:%s\n", s + i);
 			ptr[k] = ft_substr(s, i, j + 1);
 			if (!ptr[k])
 			{
@@ -146,7 +96,6 @@ static char	**ft_res(char **ptr, char *s, char c, int k)
 				return (NULL);
 			}
 			i = j + 2;
-			// printf("here:%c\n", s[i]);
 			k++;
 		}
 		else

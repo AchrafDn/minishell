@@ -1,8 +1,9 @@
 CC = cc
 RM = rm -f
-NAME = a.out
-Cflags = -Wall -Wextra -Werror
-Cfiles = parssing.c\
+NAME = minishell
+Cflags = -Wall -Wextra -Werror -I /usr/include/readline
+Lflags = -L /usr/lib -lreadline
+Cfiles = parssing.c \
 		create_list.c \
 		split_mask.c \
 		fill_node.c \
@@ -15,16 +16,15 @@ Cfiles = parssing.c\
 		libft/ft_strlen.c \
 		libft/ft_substr.c \
 		libft/ft_strcmp.c \
-		libft/ft_strdup.c \
-		
+		libft/ft_strdup.c
+
 OBJ = ${Cfiles:.c=.o}
 
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-		@$(CC) $(Cflags) $(OBJ) -o $(NAME)
-
-${OBJ} :  $(Cfiles)
+		@$(CC) $(Lflags) $(OBJ) -o $(NAME)
+#@$(CC) $(Lflags) $(OBJ) -o $(NAME)
 
 .c.o:
 		@$(CC) $(Cflags) -c $< -o $@

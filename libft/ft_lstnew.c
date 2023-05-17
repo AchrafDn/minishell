@@ -13,11 +13,12 @@
 #include "../header.h"
 #include "libft.h"
 
-t_cmd	*ft_lstnew()
+t_cmd	*ft_lstnew(int i)
 {
-	t_cmd *p;
+	t_cmd	*p;
 
-	p = malloc(sizeof(t_cmd)); //free
+	i = 0;
+	p = malloc(sizeof(t_cmd));
 	if (!p)
 		return (NULL);
 	p->next = NULL;

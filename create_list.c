@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_list.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adadoun <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/14 16:02:28 by adadoun           #+#    #+#             */
+/*   Updated: 2023/05/14 16:02:29 by adadoun          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
 
 void	init_arguments(t_args *args, t_vars *vars)
@@ -28,37 +40,43 @@ void	fill_cmd(t_cmd **lst, t_args *args, t_vars *vars)
 		else
 			ft_command(lst, vars);
 	}
+	(*lst)->command[vars->i_cmd] = NULL;
+	(*lst)->files[vars->i_file].arr_file = NULL;
+	(*lst)->files[vars->i_file].type = 0;
 }
 
-// void	resit_args(t_cmd **lst, t_args *args, t_vars *vars)
-// {
-
-// }
-void	fill_lst(t_cmd **lst, t_args *args, t_vars *vars)
+char	*fill_lst(t_cmd **lst, t_args *args, t_vars *vars)
 {
-	t_cmd *temp1;
-	t_cmd *temp2;
+	t_cmd	*temp1;
 
 	vars->i_2d = 0;
-	(*lst) = ft_lstnew();
-	temp = (*lst);
+	(*lst) = ft_lstnew(0);
+	if (!(*lst))
+		return (NULL);
+	temp1 = (*lst);
 	while (vars->ar_2d[vars->i_2d])
 	{
-		alloc_cmd(&temp, vars);
-		alloc_files(&temp, vars);
-		fill_cmd(&temp, args, vars);
+		alloc_cmd(&temp1, vars);
+		alloc_files(&temp1, vars);
+		temp1->command[0] = NULL;
+		temp1->files[0].arr_file = NULL;
+		temp1->files[0].type = 0;
+		fill_cmd(&temp1, args, vars);
 		if (!vars->ar_2d[vars->i_2d])
-			break;
-		temp->next = ft_lstnew();
+			break ;
+		vars->i_2d++;
+		temp1->next = ft_lstnew(0);
+		temp1 = temp1->next;
 	}
+	return ("Good");
 }
 
-void	create_list(t_vars *vars)
+char	*create_list(t_cmd **lst, t_vars *vars)
 {
-	t_args args;
-	t_cmd *lst;
+	t_args	args;
 
 	init_arguments(&args, vars);
-	// aloc_nodes(&lst, &args, vars);
-	fill_lst(&lst, &args, vars);
+	if (!fill_lst(lst, &args, vars))
+		return (NULL);
+	return ("Good");
 }
