@@ -42,7 +42,7 @@ void	fill_cmd(t_cmd **lst, t_args *args, t_vars *vars)
 	}
 	(*lst)->command[vars->i_cmd] = NULL;
 	(*lst)->files[vars->i_file].arr_file = NULL;
-	(*lst)->files[vars->i_file].type = 0;
+	(*lst)->files[vars->i_file].type = -1;
 }
 
 char	*fill_lst(t_cmd **lst, t_args *args, t_vars *vars)

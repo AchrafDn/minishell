@@ -59,6 +59,8 @@ char	*parssing(t_cmd **lst, t_vars *vars, char *input)
 {
 	if (!create_2d_array(vars, input))
 		return (NULL);
+	if (expand(vars))
+		return(NULL);
 	if (!create_list(lst, vars))
 		return (NULL);
 	return ("Good");
@@ -77,13 +79,30 @@ void	ft_free_allocation(t_cmd **lst, t_vars *vars, char *input)
 		free(vars->mask);
 }
 
-int	main(void)
+t_list	*my_env(char	**env)
+{
+	int 	i;
+	t_list	*list;
+
+	i = 0;
+	list = NULL;
+	while(env[i])
+	{
+		ft_lstadd_back_env(&list, ft_lstnew_env(env[i]));
+		i++;
+	}
+	return(list);
+}
+
+int	main(int ac, char **av, char **env)
 {
 	t_vars	vars;
 	t_cmd	*lst;
 	char	*input;
 
 	lst = NULL;
+	ac = 0;
+	av = NULL;
 	while (1)
 	{
 		input = readline("$minishell>: ");
@@ -93,6 +112,7 @@ int	main(void)
 			free(input);
 			continue ;
 		}
+		global = my_env(env);
 		parssing(&lst, &vars, input);
 		// excution(&lst, vars, env);
 		ft_free_allocation(&lst, &vars, input);

@@ -40,7 +40,7 @@ char	*create_mask(t_vars *vars, char *str)
 			vars->mask[i] = '3';
 		else if (str[i] == '<' || str[i] == '>')
 			vars->mask[i] = '2';
-		else if (str[i] == '"' || str[i] == '\'')
+		else if (str[i] == '"')
 			i = create_mask_quotes(vars, str, i);
 		else
 			vars->mask[i] = '1';

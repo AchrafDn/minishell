@@ -6,7 +6,7 @@
 /*   By: adadoun <adadoun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:08:06 by adadoun           #+#    #+#             */
-/*   Updated: 2022/11/01 14:11:44 by adadoun          ###   ########.fr       */
+/*   Updated: 2023/05/21 12:06:15 by adadoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@
 size_t	ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strjoin_char(const char *s1,char s2);
 char	**ft_split(const char *s, char c);
 int		ft_strcmp(char *s1, char *s2);
+int		ft_strncmp(char s1, char *s2, size_t n);
 char	*ft_strdup(char *s1);
 
 #endif

@@ -11,8 +11,12 @@ Cfiles = parssing.c \
 		libft/ft_lstadd_back.c \
 		libft/ft_lstlast.c \
 		libft/ft_lstnew.c \
+		libft/ft_lstadd_back_env.c \
+		libft/ft_lstlast_env.c \
+		libft/ft_lstnew_env.c \
 		libft/ft_split.c \
 		libft/ft_strjoin.c \
+		libft/ft_strjoin_char.c \
 		libft/ft_strlen.c \
 		libft/ft_substr.c \
 		libft/ft_strcmp.c \

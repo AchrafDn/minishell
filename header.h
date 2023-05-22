@@ -38,6 +38,14 @@ typedef struct t_args
 	int				cmd_index;
 }					t_args;
 
+typedef struct t_list
+{
+	char			*content;
+	struct	t_list 	*next;
+}					t_list;
+
+t_list	*global;
+
 typedef struct t_vars
 {
 	int				word;
@@ -46,7 +54,12 @@ typedef struct t_vars
 	int				i_2d;
 	int				i_file;
 	int				i_cmd;
+	t_list			*myenv;
 }					t_vars;
+/**/
+void				ft_lstadd_back_env(t_list **lst, t_list *new);
+t_list				*ft_lstlast_env(t_list *lst);
+t_list				*ft_lstnew_env(char	*str);
 /**/
 void				ft_input_redirection(t_cmd **lst, t_vars *vars);
 void				ft_output_redirection(t_cmd **lst, t_vars *vars);
