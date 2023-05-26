@@ -26,7 +26,7 @@ char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strjoin_char(const char *s1,char s2);
 char	**ft_split(const char *s, char c);
 int		ft_strcmp(char *s1, char *s2);
-int		ft_strncmp(char s1, char *s2, size_t n);
+char	*ft_str_env_cmp(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 
 #endif

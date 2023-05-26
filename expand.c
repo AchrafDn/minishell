@@ -13,81 +13,101 @@ int	special_char(char c)
 char	*get_env_value(char *str)
 {
 	char	*variable;
+	char	*value;
 	t_list	*list;
 
 	list = global;
 	variable = ft_strjoin_char(str, '=');
 	while(list)
 	{
-		if(ft_strncmp(variable, list->content, ft_strlen(variable)))
-			return(list->content + (ft_strlen(variable)));
+		value = ft_str_env_cmp(variable, list->content);
+		if(value)
+		{
+			free (variable);
+			return(value);
+		}
 		list = list->next;
 	}
+	free (variable);
+	free (value);
 	return(NULL);
 }
 
-int	detect_variable(t_vars *vars, char **new_str, int j)
+void	detect_variable(t_vars *vars)
 {
 	char	*variable;
 	char	*value;
 	char	*temp;
 	int		i;
 
-	j++;
-	i = j;
-	while(vars->ar_2d[vars->i_2d][j] && special_char(vars->ar_2d[vars->i_2d][j]) != 0)
-		j++;
-	variable = ft_substr(vars->ar_2d[vars->i_2d], i, j);
-	temp = (*new_str);
+	vars->i_xp++;
+	i = vars->i_xp;
+	while(vars->ar_2d[vars->i_2d][vars->i_xp] && special_char(vars->ar_2d[vars->i_2d][vars->i_xp]) != 0)
+		vars->i_xp++;
+	variable = ft_substr(vars->ar_2d[vars->i_2d], i, vars->i_xp - i);
 	value = get_env_value(variable);
-	(*new_str) = ft_strjoin((*new_str), value);
-	free(temp);
-	return(j);
+	temp = vars->str_exp;
+	vars->str_exp = ft_strjoin(vars->str_exp, value);
+	free(variable);
+	free(value);
 } 
 
-int	no_quotes(t_vars *vars, char **new_str, int j)
+void	no_quotes(t_vars *vars)
 {
-	char	*temp;
-
-	while (vars->ar_2d[vars->i_2d][j] && vars->ar_2d[vars->i_2d][j] != '\'', vars->ar_2d[vars->i_2d][j] != '"')
+	while (vars->ar_2d[vars->i_2d][vars->i_xp] && vars->ar_2d[vars->i_2d][vars->i_xp] != '\'' && vars->ar_2d[vars->i_2d][vars->i_xp] != '"')
 	{
-		temp = (*new_str);
-		if (vars->ar_2d[vars->i_2d][j] == '$')
-			j = detect_variable(vars, new_str, j);
+		if (vars->ar_2d[vars->i_2d][vars->i_xp] == '$')
+			detect_variable(vars);
 		else
 		{
-			(*new_str) = ft_strjoin_char((*new_str), vars->ar_2d[vars->i_2d][j]);
-			j++;
+			vars->str_exp = ft_strjoin_char(vars->str_exp, vars->ar_2d[vars->i_2d][vars->i_xp]);
+			vars->i_xp++;
 		}
-		free (temp);
 	}
 }
+void	double_quotes(t_vars *vars)
+{
+	while (vars->ar_2d[vars->i_2d][vars->i_xp] && vars->ar_2d[vars->i_2d][vars->i_xp] != '"')
+	{
+		if (vars->ar_2d[vars->i_2d][vars->i_xp] == '$')
+			detect_variable(vars);
+		else
+		{
+			vars->str_exp = ft_strjoin_char(vars->str_exp, vars->ar_2d[vars->i_2d][vars->i_xp]);
+			vars->i_xp++;
+		}
+	}
+}
+void	single_quotes(t_vars *vars)
+{
+	while (vars->ar_2d[vars->i_2d][vars->i_xp] && vars->ar_2d[vars->i_2d][vars->i_xp] != '\'')
+	{
+		vars->str_exp = ft_strjoin_char(vars->str_exp, vars->ar_2d[vars->i_2d][vars->i_xp]);
+		vars->i_xp++;
+	}
+}
+
 char    *expand(t_vars *vars)
 {
-	char	*new_str;
-	int		q;
-	int		i;
-	int		j;
-
-	q = 0;
-	i = 0;
 	vars->i_2d = 0;
-	new_str = malloc(1);
-	new_str[0] = '\0';
 	while(vars->ar_2d[vars->i_2d])
 	{
-		j = 0;
-		while(vars->ar_2d[vars->i_2d][j])
+		vars->str_exp = malloc(1);
+		vars->str_exp[0] = '\0';
+		vars->i_xp = 0;
+		while(vars->ar_2d[vars->i_2d][vars->i_xp])
 		{	
-			// if (vars->ar_2d[vars->i_2d][j] == '\'')
-			// 	j = single_quotes(vars, &new_str, j);
-			// else if(vars->ar_2d[vars->i_2d][j] == '\"')
-			// 	j = double_quotes(vars, &new_str, j);
-			// else
-				j = no_quotes(vars, &new_str, j);
-			j++;
+			if (vars->ar_2d[vars->i_2d][vars->i_xp] == '\'')
+				single_quotes(vars);
+			else if(vars->ar_2d[vars->i_2d][vars->i_xp] == '\"')
+				double_quotes(vars);
+			else
+				no_quotes(vars);
+			vars->i_xp++;
 		}
-		vars->ar_2d[vars->i_2d] = (*new_str);
+		vars->ar_2d[vars->i_2d] = vars->str_exp;
+		vars->str_exp = NULL;
 		vars->i_2d++;
 	}
+	return(vars->str_exp);
 }

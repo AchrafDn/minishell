@@ -55,7 +55,11 @@ typedef struct t_vars
 	int				i_file;
 	int				i_cmd;
 	t_list			*myenv;
+	char			*str_exp;
+	int				i_xp;
 }					t_vars;
+/**/
+char    			*expand(t_vars *vars);
 /**/
 void				ft_lstadd_back_env(t_list **lst, t_list *new);
 t_list				*ft_lstlast_env(t_list *lst);
@@ -78,5 +82,3 @@ t_cmd				*ft_lstnew(int i);
 t_cmd				*ft_lstlast(t_cmd *lst);
 void				ft_lstadd_back(t_cmd **lst, t_cmd *new);
 #endif
-
-//

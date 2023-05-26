@@ -21,10 +21,13 @@ char	*ft_strjoin_char(const char *s1,char s2)
 	if (!p)
 		return (NULL);
 	i = 0;
-	while (s1[i])
-	{
-		p[i] = s1[i];
-		i++;
+	if (s1)
+	{	
+		while (s1[i])
+		{
+			p[i] = s1[i];
+			i++;
+		}
 	}
 	p[i] = s2;
 	p[i + 1] = '\0';

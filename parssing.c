@@ -59,8 +59,8 @@ char	*parssing(t_cmd **lst, t_vars *vars, char *input)
 {
 	if (!create_2d_array(vars, input))
 		return (NULL);
-	if (expand(vars))
-		return(NULL);
+	expand(vars);
+		// return(NULL);
 	if (!create_list(lst, vars))
 		return (NULL);
 	return ("Good");
@@ -114,6 +114,19 @@ int	main(int ac, char **av, char **env)
 		}
 		global = my_env(env);
 		parssing(&lst, &vars, input);
+		t_cmd *temp;
+		temp = lst;
+		while(lst)
+		{
+			int i = -1;
+			while(lst->command[++i])
+				printf("command	-->%s\n", lst->command[i]);
+			i = -1;
+			while(lst->files[++i].arr_file)
+				printf("file	-->%s\n", lst->files[i].arr_file);
+			lst = lst->next;
+		}
+		lst = temp;
 		// excution(&lst, vars, env);
 		ft_free_allocation(&lst, &vars, input);
 	}

@@ -12,19 +12,22 @@
 
 #include "libft.h"
 
-int	ft_strncmp(char *f, char *s, size_t n)
+char	*ft_str_env_cmp(char *f, char *s)
 {
 	size_t	i;
+	size_t	n;
 
 	i = 0;
-	if (n == 0)
-		return (0);
-	while ((f[i] || s[i]) && i < n)
+	n = ft_strlen(f);
+	while (f[i] && s[i] &&  i < n)
 	{
-		if (f[i] == s[i])
-			i++;
-		else
-			return ((unsigned char)f[i] - (unsigned char)s[i]);
+		if (f[i] != s[i])
+			return (NULL);
+		i++;
 	}
-	return (0);
+	if(i != n)
+		return (NULL);
+	char	*temp;
+	temp = ft_substr(s, ft_strlen(f), ft_strlen(s));
+	return (temp);
 }
