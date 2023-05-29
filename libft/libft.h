@@ -23,7 +23,7 @@
 size_t	ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
-char	*ft_strjoin_char(const char *s1,char s2);
+char	*ft_strjoin_char(const char *s1, char s2);
 char	**ft_split(const char *s, char c);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_str_env_cmp(char *s1, char *s2);

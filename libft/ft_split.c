@@ -45,21 +45,6 @@ static int	nword(const char *s, char c)
 	return (nb);
 }
 
-static void	ft_free(char **s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-	{
-		free(s[i]);
-		s[i] = NULL;
-		i++;
-	}
-	free(s);
-	s = NULL;
-}
-
 static char	**ft_res(char **ptr, char *s, char c, int k)
 {
 	size_t	j;
@@ -73,30 +58,17 @@ static char	**ft_res(char **ptr, char *s, char c, int k)
 			j++;
 		if (j != 0)
 		{
-			if (s[i + j] == '"')
-				j--;
-			ptr[k] = ft_substr(s, i, j);
-			if (!ptr[k])
-			{
-				ft_free(ptr);
-				return (NULL);
-			}
+			(s[i + j] == '"') && (j--);
+			ptr[k++] = ft_substr(s, i, j);
 			i = i + j;
-			k++;
 		}
 		if (s[i] && s[i] == '"')
 		{
 			j = 1;
 			while (s[i + j] != '"')
 				j++;
-			ptr[k] = ft_substr(s, i, j + 1);
-			if (!ptr[k])
-			{
-				ft_free(ptr);
-				return (NULL);
-			}
+			ptr[k++] = ft_substr(s, i, j + 1);
 			i = j + 2;
-			k++;
 		}
 		else
 			i++;

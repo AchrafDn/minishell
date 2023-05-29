@@ -16,18 +16,18 @@ char	*ft_str_env_cmp(char *f, char *s)
 {
 	size_t	i;
 	size_t	n;
+	char	*temp;
 
 	i = 0;
 	n = ft_strlen(f);
-	while (f[i] && s[i] &&  i < n)
+	while (f[i] && s[i] && i < n)
 	{
 		if (f[i] != s[i])
 			return (NULL);
 		i++;
 	}
-	if(i != n)
+	if (i != n)
 		return (NULL);
-	char	*temp;
 	temp = ft_substr(s, ft_strlen(f), ft_strlen(s));
 	return (temp);
 }

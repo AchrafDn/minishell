@@ -41,10 +41,10 @@ typedef struct t_args
 typedef struct t_list
 {
 	char			*content;
-	struct	t_list 	*next;
+	struct t_list	*next;
 }					t_list;
 
-t_list	*global;
+t_list	*g_global;
 
 typedef struct t_vars
 {
@@ -59,7 +59,15 @@ typedef struct t_vars
 	int				i_xp;
 }					t_vars;
 /**/
-char    			*expand(t_vars *vars);
+void				detect_variable(t_vars *vars);
+void				no_quotes(t_vars *vars);
+void				double_quotes(t_vars *vars);
+void				single_quotes(t_vars *vars);
+/**/
+t_list				*my_env(char	**env);
+char				*expand(t_vars *vars);
+char				*get_env_value(char *str);
+int					special_char(char c);
 /**/
 void				ft_lstadd_back_env(t_list **lst, t_list *new);
 t_list				*ft_lstlast_env(t_list *lst);

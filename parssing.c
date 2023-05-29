@@ -60,7 +60,6 @@ char	*parssing(t_cmd **lst, t_vars *vars, char *input)
 	if (!create_2d_array(vars, input))
 		return (NULL);
 	expand(vars);
-		// return(NULL);
 	if (!create_list(lst, vars))
 		return (NULL);
 	return ("Good");
@@ -68,6 +67,8 @@ char	*parssing(t_cmd **lst, t_vars *vars, char *input)
 
 void	ft_free_allocation(t_cmd **lst, t_vars *vars, char *input)
 {
+	t_list	*temp;
+
 	if ((*lst))
 		ft_free_lst(lst);
 	if (vars->ar_2d)
@@ -77,21 +78,12 @@ void	ft_free_allocation(t_cmd **lst, t_vars *vars, char *input)
 	input = NULL;
 	if (vars->mask)
 		free(vars->mask);
-}
-
-t_list	*my_env(char	**env)
-{
-	int 	i;
-	t_list	*list;
-
-	i = 0;
-	list = NULL;
-	while(env[i])
+	while (g_global)
 	{
-		ft_lstadd_back_env(&list, ft_lstnew_env(env[i]));
-		i++;
+		temp = g_global;
+		g_global = g_global->next;
+		free (temp);
 	}
-	return(list);
 }
 
 int	main(int ac, char **av, char **env)
@@ -99,6 +91,7 @@ int	main(int ac, char **av, char **env)
 	t_vars	vars;
 	t_cmd	*lst;
 	char	*input;
+	t_cmd	*temp;
 
 	lst = NULL;
 	ac = 0;
@@ -109,26 +102,26 @@ int	main(int ac, char **av, char **env)
 		add_history(input);
 		if (input[0] == '\0')
 		{
-			free(input);
+			free (input);
 			continue ;
 		}
-		global = my_env(env);
+		g_global = my_env(env);
 		parssing(&lst, &vars, input);
-		t_cmd *temp;
 		temp = lst;
-		while(lst)
+		while (lst)
 		{
 			int i = -1;
-			while(lst->command[++i])
+			while (lst->command[++i])
 				printf("command	-->%s\n", lst->command[i]);
 			i = -1;
-			while(lst->files[++i].arr_file)
+			while (lst->files[++i].arr_file)
 				printf("file	-->%s\n", lst->files[i].arr_file);
 			lst = lst->next;
 		}
 		lst = temp;
 		// excution(&lst, vars, env);
 		ft_free_allocation(&lst, &vars, input);
+		// system("leaks minishell");
 	}
 	return (0);
 }

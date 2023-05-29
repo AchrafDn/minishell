@@ -82,8 +82,6 @@ char	*split_mask(t_vars *vars, char *str)
 	i = 0;
 	x = 0;
 	vars->ar_2d = malloc((sizeof(char *)) * (n_word(vars) + 1));
-	if (!vars->ar_2d)
-		return (NULL);
 	while (vars->mask[i])
 	{
 		j = 0;

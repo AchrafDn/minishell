@@ -1,11 +1,11 @@
 CC = cc
 RM = rm -f
 NAME = minishell
-Cflags = -Wall -Wextra -Werror -I /usr/include/readline -g3
+Cflags = -Wall -Wextra -Werror -I /usr/include/readline
 Lflags = -L /usr/lib -lreadline
-SanitizeFlags = -fsanitize=address
 Cfiles = parssing.c \
 		expand.c \
+		expanding.c \
 		create_list.c \
 		split_mask.c \
 		fill_node.c \
@@ -25,25 +25,24 @@ Cfiles = parssing.c \
 		libft/ft_str_env_cmp.c \
 		libft/ft_strdup.c
 
+
 OBJ = ${Cfiles:.c=.o}
 
-all: $(NAME)
+all : $(NAME)
 
-$(NAME): $(OBJ)
-	@$(CC) $(Lflags) $(OBJ) -o $(NAME)
+$(NAME) : $(OBJ)
+		@$(CC) $(Lflags) $(OBJ) -o $(NAME)
 
-fsanitize: Cflags += $(SanitizeFlags)
-fsanitize: $(OBJ)
-	@$(CC) $(Lflags) $(Cflags) $(OBJ) -o $(NAME)
+#@$(CC) $(Lflags) $(OBJ) -o $(NAME)
 
 .c.o:
-	@$(CC) $(Cflags) -c $< -o $@
+		@$(CC) $(Cflags) -c $< -o $@
 
-clean:
-	$(RM) $(OBJ)
+clean :
+		$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+		$(RM) $(NAME)
 
 re: fclean all
-#-fsanitize=address -g3
+#
