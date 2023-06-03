@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adadoun <adadoun@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kkouaz <kkouaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 12:25:29 by adadoun           #+#    #+#             */
-/*   Updated: 2022/10/30 19:15:50 by adadoun          ###   ########.fr       */
+/*   Updated: 2023/05/18 02:36:27 by kkouaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "../header.h"
 
-t_cmd	*ft_lstlast(t_cmd *lst)
+t_cmd	*ft_lstlast_1(t_cmd *lst)
 {
 	if (!lst)
 		return (NULL);

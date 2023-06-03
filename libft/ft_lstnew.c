@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adadoun <adadoun@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kkouaz <kkouaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 18:32:36 by adadoun           #+#    #+#             */
-/*   Updated: 2022/10/31 20:45:38 by adadoun          ###   ########.fr       */
+/*   Updated: 2023/05/18 02:34:45 by kkouaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 #include "libft.h"
 
-t_cmd	*ft_lstnew(int i)
+t_cmd	*ft_lstnew_1(int i)
 {
 	t_cmd	*p;
 

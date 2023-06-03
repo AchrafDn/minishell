@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adadoun <adadoun@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kkouaz <kkouaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 15:31:02 by adadoun           #+#    #+#             */
-/*   Updated: 2022/10/31 20:50:27 by adadoun          ###   ########.fr       */
+/*   Updated: 2023/05/21 17:15:26 by kkouaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 #include"../header.h"
 
-void	ft_lstadd_back(t_cmd **lst, t_cmd *new)
+void	ft_lstadd_back_1(t_cmd **lst, t_cmd *new)
 {
 	t_cmd	*temp;
 
@@ -23,7 +23,7 @@ void	ft_lstadd_back(t_cmd **lst, t_cmd *new)
 		*lst = new;
 	else
 	{
-		temp = ft_lstlast(*lst);
+		temp = ft_lstlast_1(*lst);
 		temp->next = new;
 	}
 }

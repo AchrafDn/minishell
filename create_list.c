@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adadoun <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kkouaz <kkouaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:02:28 by adadoun           #+#    #+#             */
-/*   Updated: 2023/05/14 16:02:29 by adadoun          ###   ########.fr       */
+/*   Updated: 2023/06/02 04:13:22 by kkouaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	fill_cmd(t_cmd **lst, t_args *args, t_vars *vars)
 			ft_command(lst, vars);
 	}
 	(*lst)->command[vars->i_cmd] = NULL;
-	(*lst)->files[vars->i_file].arr_file = NULL;
-	(*lst)->files[vars->i_file].type = 0;
+	(*lst)->files[vars->i_file].file = NULL;
+	(*lst)->files[vars->i_file].type = -1;
 }
 
 char	*fill_lst(t_cmd **lst, t_args *args, t_vars *vars)
@@ -50,7 +50,7 @@ char	*fill_lst(t_cmd **lst, t_args *args, t_vars *vars)
 	t_cmd	*temp1;
 
 	vars->i_2d = 0;
-	(*lst) = ft_lstnew(0);
+	(*lst) = ft_lstnew_1(0);
 	if (!(*lst))
 		return (NULL);
 	temp1 = (*lst);
@@ -59,13 +59,13 @@ char	*fill_lst(t_cmd **lst, t_args *args, t_vars *vars)
 		alloc_cmd(&temp1, vars);
 		alloc_files(&temp1, vars);
 		temp1->command[0] = NULL;
-		temp1->files[0].arr_file = NULL;
+		temp1->files[0].file = NULL;
 		temp1->files[0].type = 0;
 		fill_cmd(&temp1, args, vars);
 		if (!vars->ar_2d[vars->i_2d])
 			break ;
 		vars->i_2d++;
-		temp1->next = ft_lstnew(0);
+		temp1->next = ft_lstnew_1(0);
 		temp1 = temp1->next;
 	}
 	return ("Good");

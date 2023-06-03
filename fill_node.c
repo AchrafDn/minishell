@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_node.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adadoun <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kkouaz <kkouaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:02:39 by adadoun           #+#    #+#             */
-/*   Updated: 2023/05/14 16:02:40 by adadoun          ###   ########.fr       */
+/*   Updated: 2023/06/02 04:02:09 by kkouaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_input_redirection(t_cmd **lst, t_vars *vars)
 {
-	(*lst)->files[vars->i_file].arr_file = ft_strdup(vars->ar_2d[vars->i_2d
+	(*lst)->files[vars->i_file].file = ft_strdup(vars->ar_2d[vars->i_2d
 			+ 1]);
 	(*(lst))->files[vars->i_file].type = 0;
 	vars->i_file++;
@@ -23,7 +23,7 @@ void	ft_input_redirection(t_cmd **lst, t_vars *vars)
 
 void	ft_output_redirection(t_cmd **lst, t_vars *vars)
 {
-	(*(lst))->files[vars->i_file].arr_file = ft_strdup(vars->ar_2d[vars->i_2d
+	(*(lst))->files[vars->i_file].file = ft_strdup(vars->ar_2d[vars->i_2d
 			+ 1]);
 	(*(lst))->files[vars->i_file].type = 1;
 	vars->i_file++;
@@ -32,7 +32,7 @@ void	ft_output_redirection(t_cmd **lst, t_vars *vars)
 
 void	ft_herdoc(t_cmd **lst, t_vars *vars)
 {
-	(*(lst))->files[vars->i_file].arr_file = ft_strdup(vars->ar_2d[vars->i_2d
+	(*(lst))->files[vars->i_file].file = ft_strdup(vars->ar_2d[vars->i_2d
 			+ 1]);
 	(*(lst))->files[vars->i_file].type = 2;
 	vars->i_file++;
@@ -41,7 +41,7 @@ void	ft_herdoc(t_cmd **lst, t_vars *vars)
 
 void	ft_append(t_cmd **lst, t_vars *vars)
 {
-	(*(lst))->files[vars->i_file].arr_file = ft_strdup(vars->ar_2d[vars->i_2d
+	(*(lst))->files[vars->i_file].file = ft_strdup(vars->ar_2d[vars->i_2d
 			+ 1]);
 	(*(lst))->files[vars->i_file].type = 3;
 	vars->i_file++;
